@@ -1,0 +1,38 @@
+﻿{
+  Items: [
+    {
+      Id: Guid_1,
+      Name: Guid_2,
+      Steps: {
+        Draft: {
+          Transitions: {
+            Published: {}
+          },
+          Validate: false,
+          NoUpdate: false
+        },
+        Published: {
+          Validate: false,
+          NoUpdate: false
+        }
+      },
+      Initial: Draft,
+      Links: {
+        delete: {
+          Method: DELETE
+        },
+        update: {
+          Method: PUT
+        }
+      }
+    }
+  ],
+  Links: {
+    create: {
+      Method: POST
+    },
+    self: {
+      Method: GET
+    }
+  }
+}

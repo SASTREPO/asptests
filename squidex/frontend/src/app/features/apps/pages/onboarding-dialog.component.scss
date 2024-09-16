@@ -1,0 +1,126 @@
+@import 'mixins';
+@import 'vars';
+
+$size-width: 825px;
+$size-height: 576px;
+$size-image: 476px;
+$size-squid: 80px;
+
+h1 {
+    font-size: 1.6rem;
+}
+
+p {
+    line-height: 1.8rem;
+}
+
+.col-image {
+    @include force-width(489px);
+
+    img {
+        width: 900px;
+    }
+}
+
+:host ::ng-deep {
+    .modal {
+        &-content,
+        &-dialog {
+            @include force-width($size-width);
+            @include force-height($size-height);
+        }
+
+        &-dialog {
+            top: 6rem;
+        }
+
+        &-content {
+            background-image: url('../../../assets/onboarding-background.png');
+        }
+
+        &-content {
+            position: relative;
+        }
+
+        &-body {
+            overflow: hidden;
+        }
+
+        &-footer {
+            border: 0;
+        }
+
+        &-close {
+            text-decoration: none !important;
+        }
+    }
+}
+
+h2 {
+    color: $color-theme-brand;
+}
+
+.header-focus {
+    color: $color-theme-brand;
+}
+
+.header-right {
+    @include absolute(2rem, 2rem);
+}
+
+.squid {
+    @include absolute(0, null, null, 50%);
+    @include circle($size-squid);
+    border: 1px solid $color-border;
+    background: $color-white;
+    margin-left: -$size-squid * .5;
+    margin-top: -$size-squid * .5;
+
+    img {
+        max-height: 80%;
+    }
+}
+
+.onboarding {
+    &-enter-leave {
+        width: 28rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &-step {
+        @include absolute($size-height - $size-image, 0, 0, 0);
+        overflow: hidden;
+
+        & > div {
+            height: 100%;
+        }
+
+        .row {
+            height: 100%;
+        }
+
+        .col:first-child {
+            padding-left: 2rem;
+            padding-right: 2rem;
+
+            p {
+                line-height: 2rem;
+            }
+        }
+
+        .col-image {
+            overflow: hidden 100%;
+
+            img {
+                border-left: 1px solid $color-border;
+                border-top: 1px solid $color-border;
+                position: absolute;
+            }
+        }
+
+        .footer {
+            @include absolute(null, null, 10rem);
+        }
+    }
+}

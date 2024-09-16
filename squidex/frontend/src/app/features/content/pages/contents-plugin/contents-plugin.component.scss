@@ -1,0 +1,13 @@
+@import 'mixins';
+@import 'vars';
+
+:host ::ng-deep {
+    .panel2-main-inner {
+        position: relative;
+    }
+
+    iframe {
+        @include absolute(0, 0, 0, 0);
+        height: 100% !important
+    }
+}

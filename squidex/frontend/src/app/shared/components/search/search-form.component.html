@@ -1,0 +1,153 @@
+@if (enableShortcut) {
+    <sqx-shortcut keys="CTRL + I" (trigger)="inputFind.focus()"></sqx-shortcut>
+}
+
+<form [class]="formClass" (ngSubmit)="search()">
+    <div class="input-group">
+        <input
+            class="form-control"
+            #inputFind
+            hintAfter="120000"
+            hintPosition="bottom-end"
+            hintText="i18n:search.fullTextTour"
+            [ngModel]="query?.fullText"
+            (ngModelChange)="changeQueryFullText($event)"
+            [ngModelOptions]="{ standalone: true }"
+            [placeholder]="placeholder"
+            shortcut="CTRL + I"
+            shortcutAction="none"
+            sqxTourStep="search" />
+
+        @if (queries) {
+            @if (saveKey | async; as key) {
+                <button class="btn btn-outline-secondary" (click)="queries.remove(key)" type="button">
+                    <i class="icon-star-full"></i>
+                </button>
+            } @else {
+                <button class="btn btn-outline-secondary" (click)="saveQuery()" type="button">
+                    <i class="icon-star-empty"></i>
+                </button>
+            }
+        }
+
+        @if (queryModel) {
+            <button
+                class="btn btn-outline-secondary"
+                (click)="searchDialog.toggle()"
+                hintAfter="60000"
+                hintPosition="bottom-end"
+                hintText="i18n:search.advancedTour"
+                sqxTourStep="search"
+                type="button">
+                <i [class.icon-filter]="!hasFilter" [class.icon-filter-filled]="hasFilter"></i>
+            </button>
+        }
+    </div>
+</form>
+
+<sqx-modal-dialog (dialogClose)="searchDialog.hide()" size="lg" *sqxModal="searchDialog">
+    <ng-container title>
+        {{ "search.customQuery" | sqxTranslate }}
+    </ng-container>
+
+    <ng-container content>
+        @if (queries && queriesTypes) {
+            <div class="buttons2">
+                @if (saveKey | async; as key) {
+                    <a class="btn" (click)="queries.remove(key)">
+                        <i class="icon-star-full"></i>
+                    </a>
+                } @else {
+                    <a class="btn" (click)="saveQuery()">
+                        <i class="icon-star-empty"></i>
+                    </a>
+                }
+
+                <div class="btn-group ms-2">
+                    <button
+                        class="btn btn-sm btn-secondary btn-toggle"
+                        [class.btn-primary]="showQueries"
+                        (click)="changeView(true)"
+                        [disabled]="showQueries"
+                        type="button">
+                        {{ "common.designer" | sqxTranslate }}
+                    </button>
+                    <button
+                        class="btn btn-sm btn-secondary btn-toggle"
+                        [class.btn-primary]="!showQueries"
+                        (click)="changeView(false)"
+                        [disabled]="!showQueries"
+                        type="button">
+                        {{ "common.bookmarks" | sqxTranslate }}
+                    </button>
+                </div>
+            </div>
+        }
+
+        @if (showQueries) {
+            @if (queryModel) {
+                <div class="form-horizontal">
+                    <sqx-query
+                        [language]="language"
+                        [languages]="languages"
+                        [model]="queryModel"
+                        [query]="query"
+                        (queryChange)="changeQuery($event)"></sqx-query>
+
+                    <div class="link" [innerHTML]="'search.help' | sqxTranslate | sqxMarkdown | sqxSafeHtml"></div>
+                </div>
+            }
+        } @else if (queries && queriesTypes) {
+            <div class="mt-4">
+                <sqx-shared-queries
+                    [queries]="queries"
+                    [queryUsed]="query"
+                    (search)="changeQuery($event)"
+                    [types]="queriesTypes"></sqx-shared-queries>
+            </div>
+        }
+    </ng-container>
+
+    <ng-container footer>
+        <span></span>
+
+        <button class="btn btn-primary" (click)="search(true)" type="button">
+            {{ "common.submit" | sqxTranslate }}
+        </button>
+    </ng-container>
+</sqx-modal-dialog>
+
+<ng-container *sqxModal="saveQueryDialog">
+    <form [formGroup]="saveQueryForm.form" (ngSubmit)="saveQueryComplete()">
+        <sqx-modal-dialog (dialogClose)="saveQueryDialog.hide()">
+            <ng-container title>
+                {{ "search.nameQuery" | sqxTranslate }}
+            </ng-container>
+
+            <ng-container content>
+                <div class="form-group mt-2">
+                    <sqx-control-errors for="name"></sqx-control-errors>
+
+                    <input class="form-control" id="appName" autocomplete="off" formControlName="name" sqxFocusOnInit />
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" id="user" formControlName="user" type="checkbox" />
+                    <label class="form-check-label" for="user">
+                        {{ "search.saveQueryMyself" | sqxTranslate }}
+                    </label>
+                </div>
+            </ng-container>
+
+            <ng-container footer>
+                <button class="btn btn-text-secondary" (click)="saveQueryDialog.hide()" type="button">
+                    {{ "common.cancel" | sqxTranslate }}
+                </button>
+
+                <button class="btn btn-success" type="submit">
+                    {{ "common.create" | sqxTranslate }}
+                </button>
+            </ng-container>
+        </sqx-modal-dialog>
+    </form>
+</ng-container>

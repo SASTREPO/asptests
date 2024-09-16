@@ -1,0 +1,9 @@
+@if (selectedTeam | async; as team) {
+    <sqx-title [message]="team.name"></sqx-title>
+    <div class="sidebar">
+        <sqx-left-menu [team]="team"></sqx-left-menu>
+    </div>
+    <div class="panel-container" sqxLayoutContainer>
+        <router-outlet></router-outlet>
+    </div>
+}

@@ -1,0 +1,41 @@
+﻿{
+  Id: Guid_1,
+  Name: Guid_2,
+  Steps: {
+    Archived: {
+      Transitions: {
+        Draft: {}
+      },
+      Color: #eb3142,
+      Validate: false,
+      NoUpdate: true
+    },
+    Draft: {
+      Transitions: {
+        Archived: {},
+        Published: {}
+      },
+      Color: #8091a5,
+      Validate: false,
+      NoUpdate: false
+    },
+    Published: {
+      Transitions: {
+        Archived: {},
+        Draft: {}
+      },
+      Color: #4bb958,
+      Validate: false,
+      NoUpdate: false
+    }
+  },
+  Initial: Draft,
+  Links: {
+    delete: {
+      Method: DELETE
+    },
+    update: {
+      Method: PUT
+    }
+  }
+}

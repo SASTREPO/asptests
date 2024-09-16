@@ -1,0 +1,11 @@
+﻿{
+  Role: Developer,
+  Links: {
+    delete: {
+      Method: DELETE
+    },
+    update: {
+      Method: POST
+    }
+  }
+}

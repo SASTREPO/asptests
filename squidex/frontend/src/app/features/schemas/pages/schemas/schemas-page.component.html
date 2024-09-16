@@ -1,0 +1,54 @@
+<sqx-title message="i18n:common.schemas"></sqx-title>
+
+<sqx-layout layout="left" overflow="true" padding="true" titleCollapsed="i18n:common.schemas" white="true" width="18">
+    <ng-container menu>
+        <div class="row g-0">
+            @if (schemasState.canCreate | async) {
+                <div class="col-auto">
+                    <button
+                        class="btn btn-success me-2"
+                        attr.aria-label="{{ 'schemas.create' | sqxTranslate }}"
+                        (click)="createSchema()"
+                        shortcut="CTRL + U"
+                        sqxTourStep="addSchema"
+                        title="i18n:schemas.createSchemaTooltip"
+                        titlePosition="top-start"
+                        type="button">
+                        <i class="icon-plus"></i>
+                    </button>
+                </div>
+            }
+
+            <div class="col search-form">
+                <input
+                    class="form-control"
+                    [formControl]="schemasFilter"
+                    placeholder="{{ 'schemas.searchPlaceholder' | sqxTranslate }}"
+                    shortcut="CTRL + I"
+                    shortcutAction="focus" />
+
+                <i class="icon-search"></i>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container>
+        <div cdkDropListGroup>
+            @for (category of categories | async; track category.displayName) {
+                <sqx-schema-category (remove)="removeCategory($event)" [schemaCategory]="category"></sqx-schema-category>
+            }
+        </div>
+
+        <form class="mt-4" [formGroup]="addCategoryForm.form" (ngSubmit)="addCategory()">
+            <input class="form-control" formControlName="name" placeholder="{{ 'schemas.createCategory' | sqxTranslate }}" />
+        </form>
+    </ng-container>
+</sqx-layout>
+
+<sqx-schema-form
+    (create)="redirectSchema($event)"
+    (dialogClose)="addSchemaDialog.hide()"
+    [import]="import"
+    *sqxModal="addSchemaDialog"></sqx-schema-form>
+
+<router-outlet></router-outlet>

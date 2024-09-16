@@ -1,0 +1,45 @@
+﻿{
+  Id: Guid_1,
+  ParentId: Guid_Empty,
+  FileName: SampleImage_100kb.webp,
+  FileHash: fH0g7j4+h2vR6q0/E3BabgDqtFk0FnDfxT/AkuHKkf8=,
+  IsProtected: false,
+  Slug: sampleimage-100kb.webp,
+  MimeType: image/jpeg,
+  FileType: webp,
+  MetadataText: 600x400px, 37.7 kB,
+  Metadata: {
+    pixelHeight: 400,
+    pixelWidth: 600
+  },
+  Tags: [
+    type/webp,
+    image,
+    image/medium
+  ],
+  FileSize: 38580,
+  Type: Image,
+  Links: {
+    content: {
+      Method: GET
+    },
+    content/slug: {
+      Method: GET
+    },
+    delete: {
+      Method: DELETE
+    },
+    move: {
+      Method: PUT
+    },
+    self: {
+      Method: GET
+    },
+    update: {
+      Method: PUT
+    },
+    upload: {
+      Method: PUT
+    }
+  }
+}

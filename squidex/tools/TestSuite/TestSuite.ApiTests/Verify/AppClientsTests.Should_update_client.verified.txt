@@ -1,0 +1,42 @@
+﻿{
+  Items: [
+    {
+      Id: default,
+      Name: default,
+      Role: Owner,
+      AllowAnonymous: false,
+      Links: {
+        delete: {
+          Method: DELETE
+        },
+        update: {
+          Method: PUT
+        }
+      }
+    },
+    {
+      Id: Guid_1,
+      Name: My Client,
+      Role: Owner,
+      ApiCallsLimit: 100,
+      ApiTrafficLimit: 200,
+      AllowAnonymous: true,
+      Links: {
+        delete: {
+          Method: DELETE
+        },
+        update: {
+          Method: PUT
+        }
+      }
+    }
+  ],
+  Links: {
+    create: {
+      Method: POST
+    },
+    self: {
+      Method: GET
+    }
+  }
+}

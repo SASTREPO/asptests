@@ -1,0 +1,37 @@
+@import 'mixins';
+@import 'vars';
+
+:host ::ng-deep {
+    .mention-menu {
+        border-color: $color-border !important;
+    }
+
+    .mention-active > a {
+        background: $color-theme-brand !important;
+    }
+}
+
+.comments {
+    &-list {
+        background-color: $color-background;
+        flex-grow: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: .5rem;
+    }
+
+    &-header {
+        flex-shrink: 0;
+    }
+}
+
+.form-control {
+    border-color: $color-white;
+    border-bottom-color: $color-border;
+    border-radius: 0;
+
+    &:focus {
+        box-shadow: none;
+        border-color: $color-theme-brand;
+    }
+}

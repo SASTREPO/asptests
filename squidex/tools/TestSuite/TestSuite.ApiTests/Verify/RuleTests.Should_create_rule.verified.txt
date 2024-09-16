@@ -1,0 +1,33 @@
+﻿{
+  Id: Guid_1,
+  IsEnabled: true,
+  Trigger: {
+    HandleAll: true
+  },
+  Action: {
+    Url: http://squidex.io
+  },
+  Links: {
+    delete: {
+      Method: DELETE
+    },
+    disable: {
+      Method: PUT
+    },
+    logs: {
+      Method: GET
+    },
+    run: {
+      Method: PUT
+    },
+    run/snapshots: {
+      Method: PUT
+    },
+    trigger: {
+      Method: PUT
+    },
+    update: {
+      Method: PUT
+    }
+  }
+}

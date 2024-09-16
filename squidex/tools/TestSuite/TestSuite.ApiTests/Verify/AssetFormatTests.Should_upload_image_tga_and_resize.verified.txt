@@ -1,0 +1,45 @@
+﻿{
+  Id: Guid_1,
+  ParentId: Guid_Empty,
+  FileName: SampleImage_600kb.tga,
+  FileHash: KIi1RB34TaH+sGhnOIVsaPSn8ZRW1EMnM8noCzFbwsk=,
+  IsProtected: false,
+  Slug: sampleimage-600kb.tga,
+  MimeType: image/x-tga,
+  FileType: tga,
+  MetadataText: 600x400px, 617.2 kB,
+  Metadata: {
+    pixelHeight: 400,
+    pixelWidth: 600
+  },
+  Tags: [
+    type/tga,
+    image,
+    image/medium
+  ],
+  FileSize: 631995,
+  Type: Image,
+  Links: {
+    content: {
+      Method: GET
+    },
+    content/slug: {
+      Method: GET
+    },
+    delete: {
+      Method: DELETE
+    },
+    move: {
+      Method: PUT
+    },
+    self: {
+      Method: GET
+    },
+    update: {
+      Method: PUT
+    },
+    upload: {
+      Method: PUT
+    }
+  }
+}

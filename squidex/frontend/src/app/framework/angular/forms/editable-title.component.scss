@@ -1,0 +1,37 @@
+@import 'mixins';
+@import 'vars';
+
+:host {
+    display: block;
+}
+
+.title-view {
+    @include hover-visible('.title-edit', block);
+
+    .col {
+        overflow: hidden;
+    }
+}
+
+.btn-placeholder {
+    padding-left: 0;
+    padding-right: 0;
+    width: 0;
+}
+
+.row {
+    flex-wrap: nowrap;
+}
+
+h3 {
+    margin: 0;
+
+    &.sm {
+        font-size: 1rem;
+        font-weight: normal;
+    }
+
+    &.fallback {
+        color: $color-text-decent;
+    }
+}

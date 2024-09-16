@@ -1,0 +1,18 @@
+@if (collaboration.userChanges | async; as currentUsers) {
+    @if (currentUsers.length > 0) {
+        @for (state of currentUsers | slice: 0 : 5; track state.user.id; let i = $index) {
+            <div class="user-item" [style]="{ zIndex: i }">
+                <img
+                    class="user-picture"
+                    [src]="state.user.id | sqxUserPicture"
+                    [style.borderColor]="state.user.id | sqxStringColor"
+                    title="{{ state.user.displayName }}" />
+            </div>
+        }
+        @if (currentUsers.length > 5) {
+            <div class="user-item" [style]="{ zIndex: 6 }">
+                <div class="user-more">+{{ currentUsers.length - 5 }}</div>
+            </div>
+        }
+    }
+}

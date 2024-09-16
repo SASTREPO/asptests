@@ -1,0 +1,71 @@
+@import 'mixins';
+@import 'vars';
+
+/* stylelint-disable */
+
+.html-value {
+    position: relative;
+}
+
+:host {
+    display: block;
+
+    .btn {
+        @include absolute(.5rem, .25rem);
+        background-color: $color-white;
+        border: 1px solid $color-border;
+        border-radius: $border-radius;
+        display: none;
+    }
+
+    &:hover {
+        .btn {
+            display: block;
+        }
+    }
+}
+
+:host ::ng-deep {
+    .image {
+        @include truncate;
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        margin-bottom: -8px;
+        margin-top: -8px;
+    }
+
+    img {
+        background-image: $asset-background;
+        background-size: 10px 10px;
+    }
+
+    img + span {
+        padding-left: 10px;
+    }
+
+    .html-value {
+        span {
+            @include truncate;
+        }
+    }
+}
+
+.preview {
+    img {
+        @include box-shadow-outer(0, 3px, 16px, 0.2);
+        background-image: $asset-background;
+        max-width: 300px;
+        max-height: 300px;
+    }
+}
+
+.value-container {
+    cursor: default;
+    max-height: 10rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    word-wrap: break-word;
+}

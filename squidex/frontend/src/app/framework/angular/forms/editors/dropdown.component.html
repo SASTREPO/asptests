@@ -1,0 +1,75 @@
+<div class="selection">
+    <input
+        class="form-select"
+        #input
+        autocapitalize="off"
+        autocomplete="off"
+        autocorrect="off"
+        (click)="openModal()"
+        [disabled]="snapshot.isDisabled"
+        (keydown)="onKeyDown($event)"
+        readonly />
+
+    @if (snapshot.selectedItem; as selectedItem) {
+        <div class="control-dropdown-item">
+            <div class="no-wrap">
+                @if (!templateSelection) {
+                    <span class="truncate">{{ selectedItem }}</span>
+                }
+                @if (templateSelection) {
+                    <ng-template [item]="selectedItem" [sqxTemplateWrapper]="templateSelection"></ng-template>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<div class="items-container">
+    <sqx-dropdown-menu
+        adjustHeight="false"
+        [adjustWidth]="dropdownFullWidth"
+        [position]="dropdownPosition"
+        scrollX="false"
+        scrollY="true"
+        [sqxAnchoredTo]="input"
+        *sqxModal="dropdown"
+        [style]="dropdownStyles">
+        @if (canSearch) {
+            <div class="search-form">
+                <input
+                    class="form-control search"
+                    [formControl]="queryInput"
+                    (keydown)="onKeyDown($event)"
+                    placeholder="{{ 'common.search' | sqxTranslate }}"
+                    sqxFocusOnInit />
+            </div>
+        }
+
+        <div class="control-dropdown-items" #container>
+            @for (item of snapshot.suggestedItems; track item; let i = $index) {
+                <div
+                    class="control-dropdown-item control-dropdown-item-selectable"
+                    [class.active]="i === snapshot.suggestedIndex"
+                    [class.separated]="itemSeparator"
+                    (mousedown)="selectIndexAndClose(i)"
+                    [sqxScrollActive]="i === snapshot.suggestedIndex"
+                    [sqxScrollContainer]="container">
+                    @if (!templateItem) {
+                        {{ item }}
+                    }
+                    @if (templateItem) {
+                        <ng-template [context]="snapshot.query" [index]="i" [item]="item" [sqxTemplateWrapper]="templateItem"></ng-template>
+                    }
+                </div>
+            } @empty {
+                <div class="text-decent control-dropdown-item no-events">
+                    @if (itemsLoading) {
+                        <sqx-loader color="input"></sqx-loader>
+                    } @else {
+                        <small>{{ itemsEmptyText | sqxTranslate }}</small>
+                    }
+                </div>
+            }
+        </div>
+    </sqx-dropdown-menu>
+</div>

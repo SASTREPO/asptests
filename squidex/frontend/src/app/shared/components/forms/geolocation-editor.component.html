@@ -1,0 +1,71 @@
+<div
+    class="editor-container"
+    [class.compact]="snapshot.isCompact"
+    (sqxResizeCondition)="setCompact($event)"
+    sqxResizeMaxWidth="0"
+    sqxResizeMinWidth="600">
+    <form [class.hidden]="snapshot.isMapHidden">
+        <div class="editor" #editor></div>
+
+        <input
+            class="form-control search-control"
+            #searchBox
+            [class.hidden]="!isGoogleMaps"
+            [disabled]="snapshot.isDisabled"
+            placeholder="{{ 'common.searchGoogleMaps' | sqxTranslate }}" />
+    </form>
+
+    <div class="row g-0 mt-2">
+        <form class="col form-inline" (change)="updateValueByInput()" [formGroup]="geolocationForm" (ngSubmit)="updateValueByInput()">
+            <div class="row g-2 align-items-center">
+                @if (!snapshot.isCompact) {
+                    <div class="col-auto mb pe-2">
+                        <label for="latitude">{{ "common.latitudeShort" | sqxTranslate }}:</label>
+                    </div>
+                }
+                <div class="col">
+                    <sqx-control-errors for="latitude" style="z-index: 10000"></sqx-control-errors>
+
+                    <input class="form-control" id="latitude" formControlName="latitude" step="any" type="number" />
+                </div>
+
+                @if (!snapshot.isCompact) {
+                    <div class="col col-auto ps-2">
+                        <label for="longitude">{{ "common.longitudeShort" | sqxTranslate }}:</label>
+                    </div>
+                }
+                <div class="col">
+                    <sqx-control-errors for="longitude" style="z-index: 10000"></sqx-control-errors>
+
+                    <input class="form-control" id="longitude" formControlName="longitude" step="any" type="number" />
+                </div>
+
+                @if (!snapshot.isCompact) {
+                    <div class="col col-auto">
+                        <button class="btn btn-text clear" (click)="clearValue()" [disabled]="snapshot.isDisabled" type="button">
+                            {{ "common.clear" | sqxTranslate }}
+                        </button>
+                    </div>
+                }
+            </div>
+        </form>
+        <div class="col-auto">
+            <button
+                class="btn btn-text-secondary"
+                [class.hidden]="!snapshot.isMapHidden"
+                (click)="hideMap(false)"
+                title="i18n:common.mapShow"
+                type="button">
+                <i class="icon-plus-square"></i>
+            </button>
+            <button
+                class="btn btn-text-secondary"
+                [class.hidden]="snapshot.isMapHidden"
+                (click)="hideMap(true)"
+                title="i18n:common.mapHide"
+                type="button">
+                <i class="icon-minus-square"></i>
+            </button>
+        </div>
+    </div>
+</div>

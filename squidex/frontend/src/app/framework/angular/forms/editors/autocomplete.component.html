@@ -1,0 +1,61 @@
+<div class="control-container">
+    <input
+        class="form-control"
+        #input
+        autocapitalize="off"
+        autocomplete="off"
+        autocorrect="off"
+        (blur)="blur()"
+        [class.form-empty]="inputStyle === 'empty'"
+        [class.form-icon]="!!icon"
+        [class.form-underlined]="inputStyle === 'underlined'"
+        [formControl]="queryInput"
+        (keydown)="onKeyDown($event)"
+        [placeholder]="placeholder"
+        [sqxFocusOnInit]="autoFocus" />
+
+    @if (icon) {
+        <div class="icon">
+            @if (snapshot.isLoading) {
+                <sqx-loader color="input"></sqx-loader>
+            } @else {
+                <i class="icon-{{ icon }}"></i>
+            }
+        </div>
+    }
+
+    @if (allowOpen) {
+        <div class="btn btn-sm" (click)="openModal()" sqxStopClick>
+            <i class="icon-caret-down"></i>
+        </div>
+    }
+
+    <sqx-dropdown-menu
+        class="control-dropdown"
+        #container
+        adjustHeight="false"
+        [adjustWidth]="dropdownFullWidth"
+        [position]="dropdownPosition"
+        scrollX="false"
+        scrollY="true"
+        [sqxAnchoredTo]="input"
+        *sqxModal="suggestionsModal"
+        [style]="dropdownStyles">
+        @for (item of snapshot.suggestedItems; track item; let i = $index) {
+            <div
+                class="control-dropdown-item control-dropdown-item-selectable"
+                [class.active]="i === snapshot.suggestedIndex"
+                (mousedown)="selectItem(item)"
+                (mouseover)="selectIndex(i)"
+                [sqxScrollActive]="i === snapshot.suggestedIndex"
+                [sqxScrollContainer]="$any(container.nativeElement)">
+                @if (!itemTemplate) {
+                    {{ item }}
+                }
+                @if (itemTemplate) {
+                    <ng-template [index]="i" [item]="item" [sqxTemplateWrapper]="itemTemplate"></ng-template>
+                }
+            </div>
+        }
+    </sqx-dropdown-menu>
+</div>

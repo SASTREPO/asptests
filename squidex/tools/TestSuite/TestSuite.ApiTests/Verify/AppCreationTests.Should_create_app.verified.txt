@@ -1,0 +1,68 @@
+﻿{
+  Id: Guid_1,
+  Name: Guid_2,
+  Version: 2,
+  CanAccessContent: true,
+  Links: {
+    assets: {
+      Method: GET
+    },
+    assets/create: {
+      Method: POST
+    },
+    assets/scripts: {
+      Method: DELETE
+    },
+    clients: {
+      Method: GET
+    },
+    contributors: {
+      Method: GET
+    },
+    delete: {
+      Method: DELETE
+    },
+    image/delete: {
+      Method: DELETE
+    },
+    image/upload: {
+      Method: POST
+    },
+    jobs: {
+      Method: GET
+    },
+    languages: {
+      Method: GET
+    },
+    ping: {
+      Method: GET
+    },
+    plans: {
+      Method: GET
+    },
+    roles: {
+      Method: GET
+    },
+    rules: {
+      Method: GET
+    },
+    schemas: {
+      Method: GET
+    },
+    schemas/create: {
+      Method: POST
+    },
+    settings: {
+      Method: GET
+    },
+    transfer: {
+      Method: PUT
+    },
+    update: {
+      Method: PUT
+    },
+    workflows: {
+      Method: GET
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@if (errorMessages && errorMessages.length > 0) {
+    <div class="errors-container" @fade>
+        <div class="errors">
+            @for (message of errorMessages; track message) {
+                {{ message }}
+            }
+        </div>
+    </div>
+}

@@ -1,0 +1,22 @@
+@import 'mixins';
+@import 'vars';
+
+.section {
+    border-bottom: 1px solid $color-border;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+
+    &:first-child {
+        padding-top: 0;
+    }
+}
+
+.form-check {
+    margin-top: 1rem;
+}
+
+.label {
+    font-size: $font-small;
+    font-weight: normal;
+    line-height: 2.4rem;
+}

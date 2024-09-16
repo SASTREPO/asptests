@@ -1,0 +1,46 @@
+﻿{
+  Items: [
+    {
+      Iso2Code: en,
+      EnglishName: English,
+      IsMaster: true,
+      IsOptional: false
+    },
+    {
+      Iso2Code: abc,
+      EnglishName: ,
+      IsMaster: false,
+      IsOptional: false,
+      Links: {
+        delete: {
+          Method: DELETE
+        },
+        update: {
+          Method: PUT
+        }
+      }
+    },
+    {
+      Iso2Code: xyz,
+      EnglishName: ,
+      IsMaster: false,
+      IsOptional: false,
+      Links: {
+        delete: {
+          Method: DELETE
+        },
+        update: {
+          Method: PUT
+        }
+      }
+    }
+  ],
+  Links: {
+    create: {
+      Method: POST
+    },
+    self: {
+      Method: GET
+    }
+  }
+}

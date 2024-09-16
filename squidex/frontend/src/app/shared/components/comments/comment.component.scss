@@ -1,0 +1,93 @@
+@import 'mixins';
+@import 'vars';
+
+/* stylelint-disable no-descending-specificity */
+
+.actions {
+    @include absolute(0, 0, auto, auto);
+    background: $color-white;
+    border: 0;
+    border-radius: 0;
+    display: none;
+    width: auto;
+}
+
+.marker-ref {
+    @include text-variable;
+}
+
+.user-ref {
+    @include text-variable;
+}
+
+.user-picture {
+    margin-top: .25rem;
+}
+
+.user-row {
+    position: relative;
+}
+
+.col-text {
+    overflow-wrap: break-word;
+    overflow-x: hidden;
+}
+
+.comment {
+    background-color: $color-white;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-size: .85rem;
+    font-weight: normal;
+    line-height: 1.25rem;
+    margin-top: 0;
+    margin-bottom: .25rem;
+    padding: .5rem;
+    padding-top: .375rem;
+    position: relative;
+
+    &.reply {
+        margin-bottom: .75rem;
+        padding: 0;
+        padding-left: 1.5rem;
+    }
+
+    &.selected {
+        border-color: $color-theme-brand;
+    }
+
+    &-created {
+        font-size: $font-small;
+    }
+
+    &-text {
+        &:hover {
+            .actions {
+                display: block;
+            }
+        }
+    }
+}
+
+.replies {
+    border-top: 1px solid $color-border;
+    margin-bottom: 0;
+    margin-top: .5rem;
+    padding-top: .5rem;
+}
+
+:host {
+    &:last-child {
+        & > .comment {
+            margin-bottom: 0;
+        }
+    }
+}
+
+:host ::ng-deep {
+    p {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

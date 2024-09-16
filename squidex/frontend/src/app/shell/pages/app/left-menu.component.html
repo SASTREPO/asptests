@@ -1,0 +1,63 @@
+<ul class="nav flex-column">
+    <li class="nav-item" sqxTourStep="dashboard">
+        <a class="nav-link" data-testid="dashboard" routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <i class="nav-icon icon-dashboard"></i>
+            <div class="nav-text">{{ "common.dashboard" | sqxTranslate }}</div>
+        </a>
+    </li>
+    @if (!isSchemasHidden(app) && app.canReadSchemas) {
+        <li class="nav-item" sqxTourStep="schemas">
+            <a class="nav-link" data-testid="schemas" routerLink="schemas" routerLinkActive="active">
+                <i class="nav-icon icon-schemas"></i>
+                <div class="nav-text">{{ "common.schemas" | sqxTranslate }}</div>
+            </a>
+        </li>
+    }
+    @if (app.canAccessContent) {
+        <li class="nav-item" sqxTourStep="content">
+            <a class="nav-link" data-testid="content" routerLink="content" routerLinkActive="active">
+                <i class="nav-icon icon-contents"></i>
+                <div class="nav-text">{{ "common.content" | sqxTranslate }}</div>
+            </a>
+        </li>
+    }
+    @if (!isAssetsHidden(app) && app.canReadAssets) {
+        <li class="nav-item" sqxTourStep="assets">
+            <a class="nav-link" data-testid="assets" routerLink="assets" routerLinkActive="active">
+                <i class="nav-icon icon-assets"></i>
+                <div class="nav-text">{{ "common.assets" | sqxTranslate }}</div>
+            </a>
+        </li>
+    }
+    @if (app.canReadRules) {
+        <li class="nav-item" sqxTourStep="rules">
+            <a class="nav-link" data-testid="rules" routerLink="rules" routerLinkActive="active">
+                <i class="nav-icon icon-rules"></i>
+                <div class="nav-text">{{ "common.rules" | sqxTranslate }}</div>
+            </a>
+        </li>
+    }
+    @if (!isApiHidden(app)) {
+        <li class="nav-item" sqxTourStep="api">
+            <a class="nav-link" data-testid="api" routerLink="api" routerLinkActive="active">
+                <i class="nav-icon icon-api"></i>
+                <div class="nav-text">{{ "common.api" | sqxTranslate }}</div>
+            </a>
+        </li>
+    }
+</ul>
+
+<ul class="nav flex-column bottom">
+    <li class="nav-item" sqxTourStep="support">
+        <a class="nav-link" href="https://squidex.io/help" target="_blank">
+            <i class="nav-icon icon-help2"></i>
+        </a>
+    </li>
+    @if (!isSettingsHidden(app)) {
+        <li class="nav-item" sqxTourStep="settings">
+            <a class="nav-link" data-testid="settings" routerLink="settings" routerLinkActive="active">
+                <i class="nav-icon icon-settings"></i>
+            </a>
+        </li>
+    }
+</ul>

@@ -1,0 +1,97 @@
+<ul class="nav nav-light flex-column" [hidden]="forContent && schemaCategory.countSchemasInSubtree === 0">
+    <div
+        class="droppable nav-category"
+        cdkDropList
+        [cdkDropListData]="schemaCategory.name"
+        (cdkDropListDropped)="changeCategory($event)"
+        cdkDropListSortingDisabled>
+        <li class="nav-item nav-heading">
+            <div class="row g-1 align-items-center overflow-hidden">
+                <div class="col-auto">
+                    <button class="btn btn-sm btn-decent btn-text-secondary btn-toggle" (click)="toggle()" type="button">
+                        <i [class.icon-caret-down]="!isCollapsed" [class.icon-caret-right]="isCollapsed"></i>
+                    </button>
+                </div>
+                <div class="col overflow-hidden pe-1">
+                    <sqx-editable-title
+                        closeButton="false"
+                        [disabled]="!schemaCategory.name"
+                        [inputTitle]="schemaCategory.displayName | sqxTranslate"
+                        (inputTitleChange)="changeName($event)"
+                        inputTitleLength="30"
+                        size="sm"></sqx-editable-title>
+                </div>
+                <div class="col-auto">
+                    @if (schemaCategory.countSchemasInSubtree > 0) {
+                        <span class="badge rounded-pill badge-secondary">{{ schemaCategory.countSchemasInSubtreeFiltered }}</span>
+                    } @else {
+                        @if (schemaCategory.name) {
+                            <button
+                                class="btn btn-sm btn-text-secondary btn-remove"
+                                (click)="remove.emit(schemaCategory.name)"
+                                type="button">
+                                <i class="icon-bin2"></i>
+                            </button>
+                        }
+                    }
+                </div>
+            </div>
+        </li>
+
+        <div class="nav-collapsed" [hidden]="isCollapsed" [style.height]="getContainerHeight()">
+            @if (!forContent) {
+                @for (schema of schemas; track schema.id) {
+                    <li
+                        class="nav-item truncate"
+                        cdkDrag
+                        [cdkDragData]="schema"
+                        (cdkDragStarted)="dragStarted($event)"
+                        sqxTourStep="schema">
+                        <a
+                            class="nav-link truncate"
+                            [routerLink]="schemaRoute(schema)"
+                            routerLinkActive="active"
+                            sqxStopDrag
+                            title="{{ schema.displayName }}"
+                            titlePosition="top-start">
+                            <i class="icon-drag2 drag-handle" cdkDragHandle></i>
+                            <span
+                                class="item-published me-1"
+                                id="schema_{{ schema.name }}"
+                                [class.unpublished]="!schema.isPublished"></span>
+                            {{ schema.displayName }}
+                            @if (schema.type === "Singleton") {
+                                <span class="singleton">Singleton</span>
+                            }
+                        </a>
+                    </li>
+                }
+            } @else {
+                @for (schema of schemas; track schema.id) {
+                    <li class="nav-item truncate" sqxTourStep="contentSchema">
+                        <a
+                            class="nav-link truncate drag-none"
+                            [routerLink]="schemaRoute(schema)"
+                            routerLinkActive="active"
+                            sqxStopDrag
+                            title="{{ schema.displayName }}"
+                            titlePosition="top-start">
+                            {{ schema.displayName }}
+                        </a>
+                    </li>
+                }
+            }
+        </div>
+
+        <div class="drop-indicator"></div>
+    </div>
+
+    <div class="categories" [hidden]="isCollapsed">
+        @for (category of schemaCategory.categories; track category.displayName) {
+            <sqx-schema-category
+                (remove)="remove.emit($event)"
+                [schemaCategory]="category"
+                [schemaTarget]="schemaTarget"></sqx-schema-category>
+        }
+    </div>
+</ul>

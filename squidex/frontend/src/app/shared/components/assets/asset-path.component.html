@@ -1,0 +1,12 @@
+@if (path) {
+    @for (item of path; track item; let i = $index) {
+        @if (i > 0) {
+            <i class="icon-angle-right"></i>
+        }
+        <a class="btn" [class.first]="i === 0" [class.force]="i < path.length - 1 || all" (click)="navigate.emit(item)">
+            {{ item.folderName | sqxTranslate }}
+        </a>
+    } @empty {
+        <span class="btn">{{ "common.searchResults" | sqxTranslate }}</span>
+    }
+}

@@ -1,0 +1,36 @@
+<li class="nav-item nav-icon dropdown d-flex align-items-center position-relative" #button>
+    <span class="nav-link dropdown-toggle" (click)="modalMenu.show()">
+        <i class="icon-comments"></i>
+
+        @if (commentsState.unreadCountChanges | async; as unread) {
+            <span class="badge rounded-pill badge-danger">{{ unread }}</span>
+        }
+    </span>
+</li>
+
+<sqx-dropdown-menu
+    #scrollMe
+    offset="8"
+    [scrollTop]="scrollMe.nativeElement.scrollHeight"
+    scrollY="true"
+    [sqxAnchoredTo]="button"
+    *sqxModal="modalMenu; onRoot: false">
+    @if (commentItems | async; as items) {
+        @for (item of items.slice().reverse(); track $index) {
+            <sqx-comment
+                canAnswer="false"
+                canDelete="true"
+                canFollow="true"
+                [commentItem]="item"
+                [comments]="commentsState"
+                confirmDelete="false"
+                [mentionConfig]="{}"
+                [mentionUsers]="undefined"
+                [userToken]="commentUser"></sqx-comment>
+        } @empty {
+            <small class="text-muted">
+                {{ "notifications.empty" | sqxTranslate }}
+            </small>
+        }
+    }
+</sqx-dropdown-menu>

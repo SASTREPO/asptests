@@ -1,0 +1,32 @@
+@if (searchSource.selectedApp | async) {
+    <div class="search-container ms-4">
+        <sqx-autocomplete
+            #searchControl
+            [dropdownPosition]="'bottom-end'"
+            [dropdownStyles]="{ width: '30rem' }"
+            icon="search"
+            [itemsSource]="searchSource"
+            [ngModel]="searchResult"
+            (ngModelChange)="selectResult($event)"
+            placeholder="{{ 'search.quickNavPlaceholder' | sqxTranslate }}"
+            shortcut="q"
+            shortcutAction="none">
+            <ng-template let-result="$implicit">
+                <div class="row g-0">
+                    <div class="col-auto pe-4">
+                        <i class="search-icon icon-search-{{ result.type }}"></i>
+                    </div>
+                    <div class="col truncate">
+                        {{ result.name }}
+                    </div>
+                    @if (result.label) {
+                        <div class="col-auto text-end">
+                            <div class="badge rounded-pill badge-primary ms-2">{{ result.label }}</div>
+                        </div>
+                    }
+                </div>
+            </ng-template>
+        </sqx-autocomplete>
+        <sqx-shortcut keys="q" (trigger)="searchControl.focus()"></sqx-shortcut>
+    </div>
+}

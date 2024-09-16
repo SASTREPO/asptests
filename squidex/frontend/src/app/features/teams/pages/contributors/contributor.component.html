@@ -1,0 +1,21 @@
+<tr>
+    <td class="cell-user">
+        <img class="user-picture" [src]="contributor.contributorId | sqxUserPicture" title="{{ contributor.contributorName }}" />
+    </td>
+    <td class="cell-auto">
+        <span class="user-name table-cell" [innerHTML]="contributor.contributorName | sqxHighlight: search"></span>
+    </td>
+    <td class="cell-actions">
+        <button
+            class="btn btn-text-danger"
+            confirmRememberKey="removeContributor"
+            confirmText="i18n:contributors.deleteConfirmText"
+            confirmTitle="i18n:contributors.deleteConfirmTitle"
+            [disabled]="!contributor.canRevoke"
+            (sqxConfirmClick)="remove()"
+            type="button">
+            <i class="icon-bin2"></i>
+        </button>
+    </td>
+</tr>
+<tr class="spacer"></tr>

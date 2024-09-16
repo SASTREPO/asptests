@@ -1,0 +1,39 @@
+@import 'mixins';
+@import 'vars';
+
+.col {
+    &-options {
+        max-width: 160px;
+    }
+}
+
+.job {
+    &-header {
+        padding: .75rem 1.25rem;
+    }
+
+    &-header {
+        background: $color-border-light;
+        border: 0;
+        border-bottom: 2px solid $color-border;
+        position: relative;
+
+        h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 0;
+        }
+    }
+}
+
+:host ::ng-deep { 
+    .ace_editor {
+        background: none !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+    }
+}
+
+.btn-expand.expanded::before {
+    bottom: -1.35rem;
+}

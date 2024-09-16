@@ -1,0 +1,31 @@
+@import 'mixins';
+@import 'vars';
+
+:host ::ng-deep {
+    .modal-body {
+        background-color: $color-background;
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+}
+
+form {
+    width: 100%;
+}
+
+textarea {
+    height: 300px;
+}
+
+.flex-reverse {
+    flex-direction: row-reverse;
+}
+
+.scroll-container {
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 1.5rem;
+}

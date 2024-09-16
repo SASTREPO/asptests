@@ -1,0 +1,10 @@
+﻿{
+  Links: {
+    create: {
+      Method: POST
+    },
+    self: {
+      Method: GET
+    }
+  }
+}

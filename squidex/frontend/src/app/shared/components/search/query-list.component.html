@@ -1,0 +1,27 @@
+@if (queries && queries.length > 0) {
+    <ul class="nav nav-light flex-column">
+        @for (saved of queries; track saved.name) {
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="isSelectedQuery(saved)" (click)="search.emit(saved.query)">
+                    <div class="row g-0">
+                        <div class="col truncate">
+                            <i class="icon-circle" [class.hidden]="!saved.color" [style.color]="saved.color"></i>
+                            {{ saved.name | sqxTranslate }}
+                        </div>
+                        <div class="col-auto">
+                            @if (canRemove) {
+                                <a class="btn-sm btn-text-danger btn-remove" (click)="remove.emit(saved)" sqxStopClick>
+                                    <i class="icon-close"></i>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </a>
+            </li>
+        }
+    </ul>
+} @else {
+    @if (canRemove) {
+        <div class="text-muted small" [innerHTML]="'search.queriesEmpty' | sqxTranslate: { types: types }"></div>
+    }
+}

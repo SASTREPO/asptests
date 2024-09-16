@@ -1,0 +1,7 @@
+<span class="icon {{ size }}">
+    @if (element.iconCode) {
+        <i class="icon icon-{{ element.iconCode }}"></i>
+    } @else {
+        <i class="svg-icon" [innerHtml]="$any(element.iconImage) | sqxSafeHtml"></i>
+    }
+</span>

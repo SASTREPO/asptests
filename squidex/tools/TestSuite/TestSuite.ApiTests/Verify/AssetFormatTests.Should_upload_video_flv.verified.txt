@@ -1,0 +1,38 @@
+﻿{
+  Id: Guid_1,
+  ParentId: Guid_Empty,
+  FileName: SampleVideo_1280x720_1mb.flv,
+  FileHash: 3oKq+MS0nT4apMnvvhPkIpFIBkk+GY8z2qevv16cbgI=,
+  IsProtected: false,
+  Slug: samplevideo-1280x720-1mb.flv,
+  MimeType: audio/x-flv,
+  FileType: flv,
+  MetadataText: 1 MB,
+  Tags: [
+    type/flv
+  ],
+  FileSize: 1051185,
+  Links: {
+    content: {
+      Method: GET
+    },
+    content/slug: {
+      Method: GET
+    },
+    delete: {
+      Method: DELETE
+    },
+    move: {
+      Method: PUT
+    },
+    self: {
+      Method: GET
+    },
+    update: {
+      Method: PUT
+    },
+    upload: {
+      Method: PUT
+    }
+  }
+}

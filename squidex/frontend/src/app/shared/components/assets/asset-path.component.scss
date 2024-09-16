@@ -1,0 +1,16 @@
+@import 'mixins';
+@import 'vars';
+
+i {
+    vertical-align: middle;
+}
+
+.first {
+    padding-left: 0;
+}
+
+.btn {
+    &:active {
+        border-color: transparent;
+    }
+}
